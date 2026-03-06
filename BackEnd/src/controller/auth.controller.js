@@ -53,8 +53,32 @@ export const signup = async (req, res) => {
   }
 }
 
-export const login = (req, res) => {
-  res.send("login route");
+export const login = async (req, res) => {
+  const {email, password} = req.body;
+
+  try{
+    const user = await User.findOne({email});
+
+    if(!user){
+      return res.status(400).json({message: "Invalid credientials"});
+    }
+
+    const isCorrectPassroed = bcrypt.compare(password, user.password);
+    if(!isCorrectPassroed){
+      return res.status(400).json({message: "Invalid credientials"});
+    }
+
+    generateToken(user._id, res)
+    res.status(200).json({
+      success: true,
+      message: "User login succesfully",
+      data: user
+    })
+  }catch(error){
+    // Handle server error
+    console.log(`Error in signup controller, ${error.message}`);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 }
 
 export const logout = (req, res) => {
