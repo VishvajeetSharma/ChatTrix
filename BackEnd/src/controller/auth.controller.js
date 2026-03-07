@@ -41,11 +41,7 @@ export const signup = async (req, res) => {
     generateToken(createdUser._id, res);
 
     // Send success response
-    res.status(201).json({
-      success: true,
-      message: "User created successfully",
-      data: createdUser
-    });
+    res.status(201).json({ createdUser });
 
   } catch (error) {
     // Handle server error
@@ -70,11 +66,7 @@ export const login = async (req, res) => {
     }
 
     generateToken(user._id, res)
-    res.status(200).json({
-      success: true,
-      message: "User login succesfully",
-      data: user
-    })
+    res.status(200).json({ user })
   } catch (error) {
     // Handle server error
     console.log(`Error in login controller, ${error.message}`);
@@ -96,7 +88,7 @@ export const logout = (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { profilePic } = req.file;
-    
+
     const userId = req.user._id;
 
     if (!profilePic) {
@@ -108,7 +100,7 @@ export const updateProfile = async (req, res) => {
     const uploadResponce = await cloudinary.uploader.upload(profilePic);
     const updatedUser = await User.findByIdAndUpdate(userId, { profilePic: uploadResponce.secure_url }, { new: true });
 
-    res.status(200).json({message: "Update Profile Succesfully", data: updatedUser});
+    res.status(200).json({ updatedUser });
 
   } catch (error) {
     console.log(`Error is update profile controller, ${error.message}`);
