@@ -10,6 +10,8 @@ import {
 
 import { useAuthStore } from "../store/useAuthStore";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import AuthImagePattern from "../components/AuthImagePattern";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -141,8 +143,24 @@ const SignUpPage = () => {
                 )}
               </button>
             </form>
+
+            <div className="text-center">
+              <p className="text-sm text-gray-600">
+                Already have an account?{" "}
+                <Link to="/login" className="text-blue-500 hover:underline">
+                  Sign in
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
+
+        {/* Right Side - Image */}
+        <AuthImagePattern 
+          title = "Join ChatTrix and connect with friends worldwide!"
+          subttle = "Experience seamless communication with our intuitive chat app. Sign up now and start chatting!"
+          
+        />
       </div>
     </>
   );
