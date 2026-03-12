@@ -1,12 +1,23 @@
-import React from "react";
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import SettingsPage from "./pages/SettingsPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   return (
     <>
-      <button class="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900">
-        Button
-      </button>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />}/>
+        <Route path="/signup" element={<SignUpPage />}/>
+        <Route path="/login" element={<LoginPage />}/>
+        <Route path="/settings" element={<SettingsPage />}/>
+        <Route path="/profile" element={<ProfilePage />}/>
+      </Routes>
     </>
   );
 };
