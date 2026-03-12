@@ -7,8 +7,9 @@ import LoginPage from "./pages/LoginPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
 import { useAuthStore } from "./store/useAuthStore";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { Loader } from "lucide-react";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const Navigate = useNavigate();
@@ -18,18 +19,18 @@ const App = () => {
     checkAuth();
   }, []);
 
-  // console.log({authUser});
+  // console.log({ authUser });
 
-  if (isCheckingAuth && !authUser) {
+  if (isCheckingAuth && !authUser)
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader className="size-8 animate-spin" />
+        <Loader className="size-10 animate-spin" />
       </div>
     );
-  }
 
   return (
     <>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route
